@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Knight Rider Light</title>
+    <style>
+        body {
+            text-align: center;
+            background: #fff;
+            font-family: sans-serif;
+            padding-top: 40px;
+        }
+
+        .scanner {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .light {
+            width: 80px;
+            height: 40px;
+            background-color: #111;
+            transition: background-color 0.2s ease;
+            border: 1px solid #333;
+        }
+
+        .red   { background-color: red; }
+        .red-1 { background-color: #cc0000; }
+        .red-2 { background-color: #990000; }
+        .red-3 { background-color: #660000; }
+    </style>
+</head>
+<body>
+
+<div class="scanner">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const lights = $('.light');
+    let index = 0;
+    let direction = 1;
+
+    function clearLights() {
+        lights.removeClass('red red-1 red-2 red-3');
+    }
+
+    function animateLights() {
+        clearLights();
+
+        if (index > 0) lights.eq(index - 1).addClass('red-3');
+        lights.eq(index).addClass('red');
+        if (index < lights.length - 1) lights.eq(index + 1).addClass('red-1');
+        if (index < lights.length - 2) lights.eq(index + 2).addClass('red-2');
+
+        index += direction;
+        if (index === lights.length - 1 || index === 0) {
+            direction *= -1;
+        }
+    }
+
+    setInterval(animateLights, 100); // Auto start animation
+</script>
+
+</body>
+</html>
